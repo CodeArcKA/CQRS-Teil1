@@ -1,0 +1,23 @@
+CatalogService
+Q -> Aktueller Bestand
+-> E "BestandVerringert"
+-> E "BestandErhöht"
+
+OrderService
+Q -> "BestellStatus"
+-> E "FehlBestand"
+C -> "Bestellung" (1 x iPad 64GB)
+	E -> "WarenKorbBestellt" (1 x iPad 64GB)
+
+PickerService
+C -> "BestellungKommissionieren" (BestellNr.)
+	E -> "BestellungErfolgreichKommissioniert" (BestellNr.)
+	E -> "BestellungKommissionierungFehlgeschlagen" (BestellNr.)
+
+InventoryService
+	C -> "HoleWareausRegal" (Artikel, Bestellnr.)
+		-> E "BestandVerringert" (Artikel, Delta, Bestellnr.)
+		-> E "FehlBestand" (Artikel, Bestell-Nr)
+	C -> "LegeWareInRegal" (Artikel, Lieferschein-Nr.)
+		-> E "BestandErhöht" (Artikel, Delta, Lieferschein-Nr.)
+ 
